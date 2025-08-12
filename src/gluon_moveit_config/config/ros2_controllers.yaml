@@ -20,7 +20,6 @@ gluon_arm_controller:
       - axis_joint_5
       - axis_joint_6
     command_interfaces:
-      - position
+      []
     state_interfaces:
-      - position
-      - velocity
+      []
