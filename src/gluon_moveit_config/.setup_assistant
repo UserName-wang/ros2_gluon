@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: gluon_py
+    relative_path: urdf/gluon.urdf
+  srdf:
+    relative_path: config/gluon.srdf
+  package_settings:
+    author_name: wang liang
+    author_email: wang.liang@163.com
+    generated_timestamp: 1754968332
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

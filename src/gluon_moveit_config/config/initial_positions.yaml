@@ -1,0 +1,9 @@
+# Default initial positions for gluon's ros2_control fake system
+
+initial_positions:
+  axis_joint_1: 0
+  axis_joint_2: 0
+  axis_joint_3: 0
+  axis_joint_4: 0
+  axis_joint_5: 0
+  axis_joint_6: 0
