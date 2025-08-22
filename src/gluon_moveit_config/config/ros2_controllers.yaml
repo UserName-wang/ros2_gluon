@@ -6,7 +6,6 @@ controller_manager:
     gluon_arm_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
-
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
@@ -20,6 +19,13 @@ gluon_arm_controller:
       - axis_joint_5
       - axis_joint_6
     command_interfaces:
-      []
+      - position
     state_interfaces:
-      []
+      - position
+      - velocity
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: true
+    allow_integration_in_goal_trajectories: true
+    constraints:
+      stopped_velocity_tolerance: 0.01
+      goal_time: 0.5

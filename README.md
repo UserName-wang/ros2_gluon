@@ -80,6 +80,23 @@ source install/setup.bash
 ros2 launch gluon_moveit_config demo.launch.py
 ```
 
+## Controller Configuration Fixes
+
+Recent improvements have been made to fix controller initialization issues:
+
+1. **Enhanced ros2_controllers.yaml**:
+   - Added proper `command_interfaces` and `state_interfaces` definitions
+   - Included `action_monitor_rate` parameter for action server interface
+   - Added parameters for partial joint goals and trajectory integration
+   - Defined constraint parameters for better trajectory execution
+
+2. **Updated joint_limits.yaml**:
+   - Enabled acceleration limits for all joints
+   - Set reasonable acceleration values (10.0 rad/s²) for all joints
+   - This prevents the "Joint acceleration limits are not defined" warning
+
+These changes resolve the "No parameter value set" error that was occurring during controller initialization.
+
 ## Launch Files
 
 ### Display Robot
