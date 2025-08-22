@@ -1,0 +1,3 @@
+int32 actuator_id
+---
+bool is_successful

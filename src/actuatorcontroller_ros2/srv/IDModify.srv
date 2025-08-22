@@ -1,0 +1,4 @@
+int32 original_joint_id
+int32 modified_joint_id
+---
+bool is_successful

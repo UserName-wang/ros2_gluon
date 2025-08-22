@@ -1,0 +1,6 @@
+int32 actuator_id
+---
+float64 firmware_version
+int64 sn_id
+int64 error_id
+int64 version_430

@@ -41,7 +41,7 @@ sudo apt install ros-${ROS_DISTRO}-moveit ros-${ROS_DISTRO}-ros2-control ros-${R
 ### Building the Workspace
 ```bash
 cd ros2_gluon
-colcon build
+colcon build --packages-select gluon_py gluon_moveit_config
 source install/setup.bash
 ```
 
