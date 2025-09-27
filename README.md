@@ -50,109 +50,80 @@ source install/setup.bash
 ros2 launch gluon_py display.launch.py
 ```
 
-## Using MoveIt Setup Assistant
+## Troubleshooting
 
-The MoveIt Setup Assistant is a tool for configuring MoveIt packages for your robot. To use it with the Gluon robot:
+### Missing Dependencies
 
-### Launch MoveIt Setup Assistant
+If you encounter errors related to missing libraries when launching the MoveIt demo, install the following packages:
+
 ```bash
-ros2 run moveit_setup_assistant moveit_setup_assistant
+# Install urdf_parser_py for URDF parsing
+sudo apt install ros-humble-urdfdom-py
+
+# Install geometric_shapes library
+sudo apt install ros-humble-geometric-shapes
+
+# Install object recognition messages
+sudo apt install ros-humble-object-recognition-msgs
+
+# Install MoveIt visualization components
+sudo apt install ros-humble-moveit-ros-visualization ros-humble-moveit-ros-move-group
+
+# Install OMPL (Open Motion Planning Library)
+sudo apt install ros-humble-ompl
 ```
 
-This will open the graphical interface for configuring MoveIt.
+### RViz Motion Planning Plugin Error
 
-### Steps in MoveIt Setup Assistant:
-1. Click "Create New MoveIt Configuration Package"
-2. Browse to select the URDF file:
-   - Path: `src/gluon_py/urdf/gluon.urdf` or `src/gluon_py/urdf/gluon.urdf.xacro`
-3. Generate the configuration files
-4. Configure planning groups, robot poses, end effectors, and passive joints
-5. Generate the MoveIt configuration package
-
-### Updating MoveIt Configuration
-After making changes with the MoveIt Setup Assistant:
-```bash
-# Rebuild the packages
-colcon build
-source install/setup.bash
-
-# Launch MoveIt demo
-ros2 launch gluon_moveit_config demo.launch.py
+If you see an error in RViz related to the MotionPlanning display not loading, with a message like:
+```
+The class required for this display, 'moveit_rviz_plugin/MotionPlanning', could not be loaded.
 ```
 
-## Controller Configuration Fixes
+This is typically caused by missing dependencies. After installing the packages listed above and rebuilding the workspace, the issue should be resolved.
 
-Recent improvements have been made to fix controller initialization issues:
+### MoveIt Demo Launch Issues
 
-1. **Enhanced ros2_controllers.yaml**:
-   - Added proper `command_interfaces` and `state_interfaces` definitions
-   - Included `action_monitor_rate` parameter for action server interface
-   - Added parameters for partial joint goals and trajectory integration
-   - Defined constraint parameters for better trajectory execution
+If the `demo.launch.py` fails with plugin loading errors or segmentation faults:
 
-2. **Updated joint_limits.yaml**:
-   - Enabled acceleration limits for all joints
-   - Set reasonable acceleration values (10.0 rad/s²) for all joints
-   - This prevents the "Joint acceleration limits are not defined" warning
+1. Make sure all dependencies are installed (see above)
+2. Rebuild the package:
+   ```bash
+   colcon build --packages-select gluon_moveit_config --symlink-install
+   ```
+3. Source the workspace:
+   ```bash
+   source install/setup.bash
+   ```
+4. Try launching again:
+   ```bash
+   ros2 launch gluon_moveit_config demo.launch.py
+   ```
 
-These changes resolve the "No parameter value set" error that was occurring during controller initialization.
+### Common Error Messages and Solutions
 
-## Launch Files
+1. **libgeometric_shapes.so.2.3.2: cannot open shared object file**
+   - Solution: Install the geometric-shapes package:
+     ```bash
+     sudo apt install ros-humble-geometric-shapes
+     ```
 
-### Display Robot
-```bash
-ros2 launch gluon_py display.launch.py
-```
+2. **libobject_recognition_msgs__rosidl_typesupport_cpp.so: cannot open shared object file**
+   - Solution: Install the object recognition messages package:
+     ```bash
+     sudo apt install ros-humble-object-recognition-msgs
+     ```
 
-### MoveIt Demo
-```bash
-ros2 launch gluon_moveit_config demo.launch.py
-```
+3. **Could not load library libmoveit_motion_planning_rviz_plugin.so**
+   - Solution: Install MoveIt visualization components:
+     ```bash
+     sudo apt install ros-humble-moveit-ros-visualization
+     ```
 
-## Directory Structure Details
+4. **Failed to load library ... libompl.so.18: cannot open shared object file**
+   - Solution: Install the OMPL library:
+     ```bash
+     sudo apt install ros-humble-ompl
+     ```
 
-### gluon_py Package
-```
-gluon_py/
-├── config/           # Configuration files
-│   ├── gluon.rviz   # RViz configuration
-│   ├── gluon_controllers.yaml  # Controller configurations
-│   └── joint_names_gluon.yaml  # Joint names mapping
-├── gluon_py/         # Python package
-│   └── __init__.py
-├── launch/           # Launch files
-│   └── display.launch.py
-├── meshes/           # STL files for robot links
-├── test/             # Test files
-├── urdf/             # URDF model files
-├── package.xml
-└── setup.py
-```
-
-### gluon_moveit_config Package
-```
-gluon_moveit_config/
-├── config/           # MoveIt configuration files
-├── launch/           # MoveIt launch files
-├── CMakeLists.txt
-└── package.xml
-```
-
-## Testing
-
-Run tests with:
-```bash
-colcon test
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## License
-
-This project is licensed under the Apache 2.0 License - see the LICENSE file for details.
+After installing any of these packages, rebuild your workspace and source the setup files before trying to launch the demo again.

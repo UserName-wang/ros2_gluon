@@ -1,5 +1,0 @@
-string lookup_term
----
-string term_type
-bool is_changeable
-string term_explanation

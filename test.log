@@ -1,0 +1,45 @@
+./install/actuatorcontroller_ros2/lib/actuatorcontroller_ros2/rotate_by_rotations
+1. enp2s0 (No description available)
+2. wlo1 (No description available)
+3. any (Pseudo-device that captures on all interfaces)
+4. lo (No description available)
+5. enp1s0 (No description available)
+6. enx00e04c6dbf89 (No description available)
+7. docker0 (No description available)
+8. bluetooth0 (Bluetooth adapter number 0)
+9. bluetooth-monitor (Bluetooth Linux Monitor)
+10. nflog (Linux netfilter log (NFLOG) interface)
+11. nfqueue (Linux netfilter queue (NFQUEUE) interface)
+12. dbus-system (D-Bus system bus)
+13. dbus-session (D-Bus session bus)
+try open device enp2s0
+open device enp2s0 success
+ 192.168.1.111
+ip 3232235887 
+
+listening on (null)...
+Found 6 actuators:
+Actuator ID: 1 IP address: 192.168.1.30
+Actuator ID: 2 IP address: 192.168.1.30
+Actuator ID: 3 IP address: 192.168.1.30
+Actuator ID: 4 IP address: 192.168.1.30
+Actuator ID: 5 IP address: 192.168.1.30
+Actuator ID: 6 IP address: 192.168.1.30
+Please enter the actuator ID you want to control (0-255): 5
+Select rotation type:
+1. Absolute position (move to specific position)
+2. Relative rotation (rotate by specified amount from current position)
+Enter your choice (1 or 2): 2
+Please enter the relative rotation amount in degrees: 30
+Current actuator mode: Current (1)
+Switching to Profile Position mode...
+New actuator mode: Profile Position (6)
+Initial position: 10.821 degrees
+Rotating actuator ID 5 by 30 degrees from current position...
+Target absolute position: 40.821 degrees
+Final position: 14 degrees
+Target was: 30 degrees (relative)
+Position change: 3.17896 degrees
+Actuator disabled.
+release communication
+release ActuatorController

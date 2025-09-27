@@ -1,4 +1,0 @@
-bool is_query
----
-int32[] actuator_list
-int32[] actuator_switch
